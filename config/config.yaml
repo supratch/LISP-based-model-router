@@ -1,0 +1,62 @@
+# AI Workload Routing System Configuration
+
+# Server Configuration
+server:
+  host: "0.0.0.0"
+  port: 8000
+  debug: true
+  reload: true
+
+# LISP Configuration
+lisp:
+  control_port: 4342
+  map_cache_ttl: 3600
+  eid_prefixes:
+    - "10.1.0.0/16"  # General AI workloads
+    - "10.2.0.0/16"  # Fast response workloads
+    - "10.3.0.0/16"  # Complex reasoning workloads
+
+# DNS Configuration
+dns:
+  zone_name: "ai-workload.local"
+  health_check_interval: 30
+  service_timeout: 3
+  
+# LLM Model Configuration
+models:
+  gpt-4:
+    endpoint: "192.168.1.100:8080"
+    rate_limit: 60
+    cost_per_token: 0.00003
+    max_tokens: 8192
+    
+  claude-3:
+    endpoint: "192.168.2.100:8080"
+    rate_limit: 80
+    cost_per_token: 0.000015
+    max_tokens: 4096
+
+# Load Balancing Weights
+load_balancing:
+  capability: 0.4
+  load: 0.3
+  cost: 0.2
+  response_time: 0.1
+
+# Monitoring Configuration
+monitoring:
+  metric_collection_interval: 10
+  alert_check_interval: 5
+  metric_retention_hours: 24
+  
+# Security Configuration
+security:
+  cors_origins:
+    - "http://localhost:3000"
+    - "https://your-domain.com"
+  jwt_secret: "your-secret-key-change-in-production"
+  
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "json"
